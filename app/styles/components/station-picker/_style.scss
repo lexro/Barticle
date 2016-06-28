@@ -1,0 +1,26 @@
+.station-picker {
+
+  &__input {
+    background: $primary-color;
+    border: 0;
+    color: $light-color;
+    font-size: 16px;
+    padding: 12px;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__tile {
+    border-bottom: solid 1px $tertiary-color;
+    color: $dark-color;
+    font-size: 16px;
+    padding: 12px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
