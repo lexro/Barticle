@@ -5,7 +5,7 @@ import xmlToJson from 'barticle/utils/xmlToJson';
 export default Ember.Route.extend({
   model: function () {
     return Ember.RSVP.hash({
-      stations: ajax('http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V')
+      stations: ajax('https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V')
         .then(function (response) {
           var json = xmlToJson(response);
           Ember.Logger.log(json);
