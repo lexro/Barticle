@@ -34,11 +34,16 @@ export default Ember.Component.extend({
 
   actions: {
     pickStation: function (station) {
-      Ember.Logger.log(station);
+      var stationName = station.name;
+      var currentStation = this.get('inputText');
 
-      this.set('inputText', station.name);
+      // should not cause an update if we picked the same station
+      if (stationName !== currentStation) {
+        this.set('inputText', stationName);
+        this.sendAction('stationPicked', station);
+      }
+
       this.set('shouldShowStations', false);
-      this.sendAction('stationPicked', station);
     },
 
     toggleShowStations: function () {
