@@ -1,3 +1,11 @@
 {{station-picker
   placeholder="Choose starting station"
-  stations=model.stations}}
+  stations=model.stations
+  stationPicked="onStartStationPicked"}}
+
+{{#if shouldShowEndStations}}
+  {{station-picker
+    placeholder="Choose ending station"
+    stations=endStations
+    stationPicked="onEndStationPicked"}}
+{{/if}}
