@@ -24,6 +24,14 @@ export default Ember.Route.extend({
 
           return routes;
         })
+      })
+      .catch(function (error) {
+        Ember.Logger.error(error);
+
+        return {
+          stations: [],
+          routes: []
+        };
       });
   }
 });
