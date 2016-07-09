@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import ajax from 'ic-ajax';
+import xmlToJson from 'barticle/utils/xmlToJson';
 
 export default Ember.Controller.extend({
 
@@ -12,10 +14,33 @@ export default Ember.Controller.extend({
 
   actions: {
     onStartStationPicked: function (startStation) {
-      // call stnsched api in parallel http://api.bart.gov/api/sched.aspx?cmd=stnsched&orig=12th&key=MW9S-E7SL-26DU-VV8V&l=1
+      const startStationAbbr = startStation.abbr;
+
+      // call stnsched api in parallel
+      let stationSchedulePromise = ajax(`http://api.bart.gov/api/sched.aspx?cmd=stnsched&orig=${startStationAbbr}&key=MW9S-E7SL-26DU-VV8V&l=1`)
+        .then(function (response) {
+          // model the station schedule per route
+          var json = xmlToJson(response);
+          var trains = json.root.station.item;
+          var stationTrainSchedule = {};
+
+          for(let i = 0; i < trains.length; i++) {
+            let train = trains[i]['@attributes'];
+            let line = train.line;
+
+            if (!stationTrainSchedule[line]) {
+              stationTrainSchedule[line] = [train];
+            } else {
+              stationTrainSchedule[line].push(train);
+            }
+          }
+
+          return stationTrainSchedule;
+        });
+
+      this.set('stationSchedulePromise', stationSchedulePromise);
 
       // figure out what end stations to show
-      const startStationAbbr = startStation.abbr;
       const routes = this.get('model.routes');
       const stations = this.get('model.stations');
 
@@ -62,10 +87,11 @@ export default Ember.Controller.extend({
       this.set('shouldShowEndStations', true);
     },
 
-    onEndStationPicked: function () {
+    onEndStationPicked: function (endStation) {
       Ember.Logger.log('endStationPicked');
       // figure out what route to take
-      // use station schedule to display times
+      // http://api.bart.gov/api/sched.aspx?cmd=routesched&route=6&key=MW9S-E7SL-26DU-VV8V
+
     }
   }
 });

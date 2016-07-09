@@ -1,3 +1,7 @@
 @import 'variables';
 @import 'components/station-picker/_style';
 @import 'components/train-list/_style';
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
