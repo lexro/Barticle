@@ -1,0 +1,11 @@
+{{#each availableTrains as |train|}}
+  <div class='train-tile'>
+    <div class="train-tile__left">
+      <div class="train-tile__title">{{train.title}}</div>
+      <div class="train-title__departure-time">{{train.departureTime}}</div>
+    </div>
+    <div class="train-tile__right">
+      {{train.estimatedTime}}
+    </div>
+  </div>
+{{/each}}
