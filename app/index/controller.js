@@ -12,6 +12,13 @@ export default Ember.Controller.extend({
   endStations: [],
 
 
+  /**
+   * Helper to get all routes that a station is a part of
+   *
+   * @private
+   * @param  {String} stationAbbr abbreviation of the station to find the routes
+   * @return {Array<Object>}             Array of route objects from the bart api
+   */
   _getAllRoutes: function (stationAbbr) {
       const routes = this.get('model.routes');
       let startStationRoutes = [];
@@ -29,9 +36,16 @@ export default Ember.Controller.extend({
       return startStationRoutes;
   },
 
+  /**
+   * Helper to get all unique stops that a start station can travel
+   *
+   * @private
+   * @param  {Array} routes           Array of bart API routes
+   * @param  {String} startStationAbbr Abbreviation of the start station
+   * @return {Object}                  Mapping from station abbr to routes they exist in
+   */
   _getAllStops: function (routes, startStationAbbr) {
-      // get all train stops available from this station using route data
-      let endStationsAbbr = [];
+      let endStationData = {};
 
       for (let i = 0; i < routes.length; i++) {
         const route = routes[i];
@@ -39,15 +53,45 @@ export default Ember.Controller.extend({
 
         for (let j = 0; j < stationAbbrs.length; j++) {
           const stationAbbr = stationAbbrs[j];
-          const isInArray = stationAbbr !== startStationAbbr && endStationsAbbr.indexOf(stationAbbr) === -1;
+          const isNotStartStation = stationAbbr !== startStationAbbr;
 
-          if (isInArray) {
-            endStationsAbbr.push(stationAbbr);
+          if (isNotStartStation) {
+            if (endStationData[stationAbbr]) {
+              endStationData[stationAbbr].routes.push(route);
+            } else {
+              endStationData[stationAbbr] = {
+                routes: [route]
+              };
+            }
           }
         }
       }
 
-      return endStationsAbbr;
+      return endStationData;
+  },
+
+  /**
+   * Helper to get bart API station data from a list of station abbr
+   *
+   * @param  {Object} stationData
+   * @return {Array<Object>}
+   */
+  _getStations: function (stationData) {
+      const endStationsAbbr = Object.keys(stationData);
+      const stations = this.get('model.stations');
+      let endStations = [];
+
+      for (let i = 0; i < stations.length; i++) {
+        const station = stations[i];
+        const isEndStation = endStationsAbbr.indexOf(station.abbr) !== -1;
+
+        if (isEndStation) {
+          station.routes = stationData[station.abbr].routes;
+          endStations.push(station);
+        }
+      }
+
+      return endStations;
   },
 
   actions: {
@@ -59,22 +103,9 @@ export default Ember.Controller.extend({
       stationSchedulesService.fetchSchedule(startStationAbbr);
 
       // figure out what end stations to show
-      const stations = this.get('model.stations');
-
-      // find all routes for this station
       let startStationRoutes = this._getAllRoutes(startStationAbbr);
-      let endStationsAbbr = this._getAllStops(startStationRoutes, startStationAbbr);
-
-      // get the station data
-      let endStations = [];
-      for (let i = 0; i < stations.length; i++) {
-        const station = stations[i];
-        const isEndStation = endStationsAbbr.indexOf(station.abbr) !== -1;
-
-        if (isEndStation) {
-          endStations.push(station);
-        }
-      }
+      let endStationData = this._getAllStops(startStationRoutes, startStationAbbr);
+      let endStations = this._getStations(endStationData);
 
       this.set('endStations', endStations);
       this.set('shouldShowEndStations', true);
