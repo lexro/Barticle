@@ -1,6 +1,4 @@
 import Ember from 'ember';
-import ajax from 'ic-ajax';
-import xmlToJson from 'barticle/utils/xmlToJson';
 
 export default Ember.Controller.extend({
 
@@ -10,56 +8,33 @@ export default Ember.Controller.extend({
    */
   shouldShowEndStations: false,
 
+
   endStations: [],
 
-  actions: {
-    onStartStationPicked: function (startStation) {
-      const startStationAbbr = startStation.abbr;
 
-      // call stnsched api in parallel
-      let stationSchedulePromise = ajax(`http://api.bart.gov/api/sched.aspx?cmd=stnsched&orig=${startStationAbbr}&key=MW9S-E7SL-26DU-VV8V&l=1`)
-        .then(function (response) {
-          // model the station schedule per route
-          var json = xmlToJson(response);
-          var trains = json.root.station.item;
-          var stationTrainSchedule = {};
-
-          for(let i = 0; i < trains.length; i++) {
-            let train = trains[i]['@attributes'];
-            let line = train.line;
-
-            if (!stationTrainSchedule[line]) {
-              stationTrainSchedule[line] = [train];
-            } else {
-              stationTrainSchedule[line].push(train);
-            }
-          }
-
-          return stationTrainSchedule;
-        });
-
-      this.set('stationSchedulePromise', stationSchedulePromise);
-
-      // figure out what end stations to show
+  _getAllRoutes: function (stationAbbr) {
       const routes = this.get('model.routes');
-      const stations = this.get('model.stations');
-
-      // find all routes for this station
       let startStationRoutes = [];
+
       for(let i = 0; i < routes.length; i++) {
         const route = routes[i];
         const stationAbbrs = route.config.station;
-        const doesStationHaveRoute = stationAbbrs.indexOf(startStationAbbr) !== -1;
+        const doesStationHaveRoute = stationAbbrs.indexOf(stationAbbr) !== -1;
 
         if (doesStationHaveRoute) {
           startStationRoutes.push(route);
         }
       }
 
-      // get all trains leaving from this station
+      return startStationRoutes;
+  },
+
+  _getAllStops: function (routes, startStationAbbr) {
+      // get all train stops available from this station using route data
       let endStationsAbbr = [];
-      for (let i = 0; i < startStationRoutes.length; i++) {
-        const route = startStationRoutes[i];
+
+      for (let i = 0; i < routes.length; i++) {
+        const route = routes[i];
         const stationAbbrs = route.config.station;
 
         for (let j = 0; j < stationAbbrs.length; j++) {
@@ -71,6 +46,24 @@ export default Ember.Controller.extend({
           }
         }
       }
+
+      return endStationsAbbr;
+  },
+
+  actions: {
+    onStartStationPicked: function (startStation) {
+      const startStationAbbr = startStation.abbr;
+
+      // Get the start station schedule in parallel
+      const stationSchedulesService = this.get('stationSchedulesService');
+      stationSchedulesService.fetchSchedule(startStationAbbr);
+
+      // figure out what end stations to show
+      const stations = this.get('model.stations');
+
+      // find all routes for this station
+      let startStationRoutes = this._getAllRoutes(startStationAbbr);
+      let endStationsAbbr = this._getAllStops(startStationRoutes, startStationAbbr);
 
       // get the station data
       let endStations = [];
