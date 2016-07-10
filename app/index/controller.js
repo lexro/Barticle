@@ -50,12 +50,14 @@ export default Ember.Controller.extend({
       for (let i = 0; i < routes.length; i++) {
         const route = routes[i];
         const stationAbbrs = route.config.station;
+        const startStationIndex = stationAbbrs.indexOf(startStationAbbr);
 
         for (let j = 0; j < stationAbbrs.length; j++) {
           const stationAbbr = stationAbbrs[j];
           const isNotStartStation = stationAbbr !== startStationAbbr;
+          const isAfterStartStation = j > startStationIndex;
 
-          if (isNotStartStation) {
+          if (isNotStartStation && isAfterStartStation) {
             if (endStationData[stationAbbr]) {
               endStationData[stationAbbr].routes.push(route);
             } else {
