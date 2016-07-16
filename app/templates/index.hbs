@@ -10,4 +10,7 @@
     stationPicked="onEndStationPicked"}}
 {{/if}}
 
-{{train-list}}
+{{#if shouldShowTrainList}}
+  {{train-list
+    availableTrains=availableTrains}}
+{{/if}}
