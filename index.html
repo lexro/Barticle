@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <base href="/Barticle/" />
-<meta name="barticle/config/environment" content="%7B%22modulePrefix%22%3A%22barticle%22%2C%22environment%22%3A%22production%22%2C%22baseURL%22%3A%22/Barticle%22%2C%22locationType%22%3A%22auto%22%2C%22EmberENV%22%3A%7B%22FEATURES%22%3A%7B%7D%7D%2C%22APP%22%3A%7B%22name%22%3A%22barticle%22%2C%22version%22%3A%220.0.0+3bc7688d%22%7D%2C%22googleFonts%22%3A%5B%22Roboto%3A400%22%5D%2C%22contentSecurityPolicy%22%3A%7B%22font-src%22%3A%22%27self%27%20fonts.gstatic.com%22%2C%22style-src%22%3A%22%27self%27%20fonts.googleapis.com%22%7D%2C%22exportApplicationGlobal%22%3Afalse%7D" />
+<meta name="barticle/config/environment" content="%7B%22modulePrefix%22%3A%22barticle%22%2C%22environment%22%3A%22production%22%2C%22baseURL%22%3A%22/Barticle%22%2C%22locationType%22%3A%22auto%22%2C%22EmberENV%22%3A%7B%22FEATURES%22%3A%7B%7D%7D%2C%22APP%22%3A%7B%22name%22%3A%22barticle%22%2C%22version%22%3A%220.0.0+3bc7688d%22%7D%2C%22googleFonts%22%3A%5B%22Roboto%3A400%22%5D%2C%22contentSecurityPolicy%22%3A%7B%22font-src%22%3A%22%27self%27%20fonts.gstatic.com%22%2C%22style-src%22%3A%22%27self%27%20fonts.googleapis.com%22%7D%2C%22serviceWorker%22%3A%7B%22enabled%22%3Atrue%2C%22debug%22%3Afalse%2C%22includeRegistration%22%3Atrue%2C%22serviceWorkerFile%22%3A%22service-worker.js%22%7D%2C%22exportApplicationGlobal%22%3Afalse%7D" />
 <link href="//fonts.googleapis.com/css?family=Roboto:400" rel="stylesheet" type="text/css" media="all">
 
     <link rel="stylesheet" href="assets/vendor-5ea4b43c5bdd2261bcc3f6937cce2ecc.css">
@@ -20,8 +20,19 @@
     
 
     <script src="assets/vendor-1b548f304dbdf993a7b0f7a0b211e600.js"></script>
-    <script src="assets/barticle-bcd180c88f5c44d91d1357406b0ab5ae.js"></script>
+    <script src="assets/barticle-8fa5bc1217f24a9498b95f8f76710eb3.js"></script>
 
-    
+    <script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker-45f03e219698ccb285de21b229ebd302.js', {scope: './'})
+    .catch(function(error) {
+      console.error('Error registering service worker:'+error);
+    });
+    navigator.serviceWorker.addEventListener('controllerchange', function() {
+      window.location.reload();
+    });
+} else {
+  console.log('service worker not supported');
+}
+</script>
   </body>
 </html>
