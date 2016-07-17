@@ -12,7 +12,7 @@ export default Ember.Service.extend({
       return Ember.RSVP.resolve(stationSchedules[stationAbbr]);
     }
 
-    return ajax(`http://api.bart.gov/api/sched.aspx?cmd=stnsched&orig=${stationAbbr}&key=MW9S-E7SL-26DU-VV8V&l=1`)
+    return ajax(`https://api.bart.gov/api/sched.aspx?cmd=stnsched&orig=${stationAbbr}&key=MW9S-E7SL-26DU-VV8V&l=1`)
       .then(function (response) {
         // model the station schedule per route
         var json = xmlToJson(response);
