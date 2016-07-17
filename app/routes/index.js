@@ -15,7 +15,7 @@ export default Ember.Route.extend({
           return stations;
         }),
 
-      routes: ajax('http://api.bart.gov/api/route.aspx?cmd=routeinfo&route=all&key=MW9S-E7SL-26DU-VV8V')
+      routes: ajax('https://api.bart.gov/api/route.aspx?cmd=routeinfo&route=all&key=MW9S-E7SL-26DU-VV8V')
         .then(function (response) {
           var json = xmlToJson(response);
           var routes = json.root.routes.route;
