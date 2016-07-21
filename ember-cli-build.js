@@ -1,10 +1,14 @@
 /*jshint node:true*/
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var MergeTrees = require('broccoli-merge-trees');
+var Funnel = require('broccoli-funnel');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    // Add options here
+    inlineContent: {
+      'service-worker' : 'app/service-worker/register.js',
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -22,5 +26,12 @@ module.exports = function(defaults) {
 
   app.import('bower_components/normalize-css/normalize.css');
   app.import('bower_components/fastclick/lib/fastclick.js');
-  return app.toTree();
+
+  var appTree = app.toTree();
+  var serviceWorkerTree = new Funnel('app/service-worker', {
+    srcDir: '/',
+    include: ['sw.js']
+  });
+
+  return new MergeTrees([appTree, serviceWorkerTree]);
 };
