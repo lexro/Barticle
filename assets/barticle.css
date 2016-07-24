@@ -1,0 +1,42 @@
+.station-picker__input {
+  background: #5e97f6;
+  border: 0;
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+  width: 100%; }
+  .station-picker__input:focus {
+    outline: none; }
+  .station-picker__input:hover {
+    cursor: pointer; }
+
+.station-picker__tile {
+  border-bottom: solid 1px #e6e6e6;
+  color: black;
+  font-size: 16px;
+  padding: 12px; }
+  .station-picker__tile:hover {
+    cursor: pointer; }
+
+.train-list {
+  display: flex;
+  flex-direction: column; }
+
+.train-tile {
+  align-items: center;
+  border-bottom: solid 1px #e6e6e6;
+  display: flex;
+  height: 55px;
+  justify-content: space-between;
+  padding: 10px; }
+  .train-tile__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+  .train-tile__title {
+    padding: 5px 0; }
+
+* {
+  font-family: 'Roboto', sans-serif; }
+
+/*# sourceMappingURL=barticle.css.map */

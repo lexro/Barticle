@@ -1,0 +1,18 @@
+{
+	"version": 3,
+	"file": "barticle.css",
+	"sources": [
+		"../../sass_compiler-input_base_path-lTvImzES.tmp/0/app/styles/app.scss",
+		"../../sass_compiler-input_base_path-lTvImzES.tmp/0/app/styles/_variables.scss",
+		"../../sass_compiler-input_base_path-lTvImzES.tmp/0/app/styles/components/station-picker/_style.scss",
+		"../../sass_compiler-input_base_path-lTvImzES.tmp/0/app/styles/components/train-list/_style.scss"
+	],
+	"sourcesContent": [
+		"@import 'variables';\n@import 'components/station-picker/_style';\n@import 'components/train-list/_style';\n\n* {\n  font-family: 'Roboto', sans-serif;\n}\n",
+		"$light-color: rgb(255, 255, 255);\n$dark-color: rgb(0, 0, 0);\n$primary-color: #5e97f6;\n$tertiary-color: rgb(230, 230, 230);\n",
+		".station-picker {\n\n  &__input {\n    background: $primary-color;\n    border: 0;\n    color: $light-color;\n    font-size: 16px;\n    padding: 12px;\n    width: 100%;\n\n    &:focus {\n      outline: none;\n    }\n\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  &__tile {\n    border-bottom: solid 1px $tertiary-color;\n    color: $dark-color;\n    font-size: 16px;\n    padding: 12px;\n\n    &:hover {\n      cursor: pointer;\n    }\n  }\n}\n",
+		".train-list {\n  display: flex;\n  flex-direction: column;\n}\n\n.train-tile {\n  align-items: center;\n  border-bottom: solid 1px $tertiary-color;\n  display: flex;\n  height: 55px;\n  justify-content: space-between;\n  padding: 10px;\n\n  &__left {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n  }\n\n  &__title {\n    padding: 5px 0;\n  }\n}\n"
+	],
+	"mappings": "AEAA,AAAA,sBAAe,CAEJ;EACP,UAAU,EDDE,OAAO;ECEnB,MAAM,EAAE,CAAE;EACV,KAAK,EDLK,KAAG;ECMb,SAAS,EAAE,IAAK;EAChB,OAAO,EAAE,IAAK;EACd,KAAK,EAAE,IAAK,GASb;EAjBH,AAAA,sBAAe,AAUV,MAAM,CAAC;IACN,OAAO,EAAE,IAAK,GACf;EAZL,AAAA,sBAAe,AAcV,MAAM,CAAC;IACN,MAAM,EAAE,OAAQ,GACjB;;AAhBL,AAAA,qBAAe,CAmBL;EACN,aAAa,EAAE,KAAK,CAAC,GAAG,CDjBX,OAAG;ECkBhB,KAAK,EDpBI,KAAG;ECqBZ,SAAS,EAAE,IAAK;EAChB,OAAO,EAAE,IAAK,GAKf;EA5BH,AAAA,qBAAe,AAyBV,MAAM,CAAC;IACN,MAAM,EAAE,OAAQ,GACjB;;AC3BL,AAAA,WAAW,CAAC;EACV,OAAO,EAAE,IAAK;EACd,cAAc,EAAE,MAAO,GACxB;;AAED,AAAA,WAAW,CAAC;EACV,WAAW,EAAE,MAAO;EACpB,aAAa,EAAE,KAAK,CAAC,GAAG,CFJT,OAAG;EEKlB,OAAO,EAAE,IAAK;EACd,MAAM,EAAE,IAAK;EACb,eAAe,EAAE,aAAc;EAC/B,OAAO,EAAE,IAAK,GAWf;EAjBD,AAAA,iBAAW,CAQD;IACN,OAAO,EAAE,IAAK;IACd,cAAc,EAAE,MAAO;IACvB,eAAe,EAAE,aAAc,GAChC;EAZH,AAAA,kBAAW,CAcA;IACP,OAAO,EAAE,KAAM,GAChB;;AHjBH,AAAA,CAAC,CAAC;EACA,WAAW,EAAE,oBAAqB,GACnC",
+	"names": []
+}
