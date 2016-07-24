@@ -1,7 +1,7 @@
 /* global caches */
 
 // urlsToCache will be modified by a post build script
-var urlsToCache = ['/assets/barticle.css', '/assets/barticle.css.map', '/assets/barticle.js', '/assets/barticle.map', '/assets/failed.png', '/assets/passed.png', '/assets/vendor.css', '/assets/vendor.js', '/assets/vendor.map', '/crossdomain.xml', '/index.html', '/'];
+var urlsToCache = ['/Barticle/assets/barticle-0bc42cf76cc754eb84ad8f7149403272.css', '/Barticle/assets/barticle-5c778084b4f34b4e0e4e01017fa24dc3.js', '/Barticle/assets/vendor-5a4b16c03779cfeddfe2d998b43682a8.js', '/Barticle/assets/vendor-fdf65018cf42c9b78fabee913b19426d.css', '/Barticle/crossdomain.xml', '/Barticle/index.html', '/Barticle'];
 var CACHE_NAME = 'barticle-cache-v2';
 
 this.addEventListener('install', function (event) {

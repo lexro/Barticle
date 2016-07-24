@@ -861,7 +861,7 @@ define('barticle/service-worker/sw', ['exports'], function (exports) {
   /* global caches */
 
   // urlsToCache will be modified by a post build script
-  var urlsToCache = ['/assets/barticle.css', '/assets/barticle.css.map', '/assets/barticle.js', '/assets/barticle.map', '/assets/failed.png', '/assets/passed.png', '/assets/vendor.css', '/assets/vendor.js', '/assets/vendor.map', '/crossdomain.xml', '/index.html', '/', 'https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V', 'https://api.bart.gov/api/route.aspx?cmd=routeinfo&route=all&key=MW9S-E7SL-26DU-VV8V', 'https://fonts.googleapis.com/css?family=Roboto:400'];
+  var urlsToCache = ['/assets/barticle-0bc42cf76cc754eb84ad8f7149403272.css', '/assets/barticle-0bc42cf76cc754eb84ad8f7149403272.css.map', '/assets/barticle-5c778084b4f34b4e0e4e01017fa24dc3.js', '/assets/barticle.map', '/assets/failed.png', '/assets/passed.png', '/assets/vendor-fdf65018cf42c9b78fabee913b19426d.css', '/assets/vendor-5a4b16c03779cfeddfe2d998b43682a8.js', '/assets/vendor.map', '/crossdomain.xml', '/index.html', '/', 'https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V', 'https://api.bart.gov/api/route.aspx?cmd=routeinfo&route=all&key=MW9S-E7SL-26DU-VV8V', 'https://fonts.googleapis.com/css?family=Roboto:400'];
   var CACHE_NAME = 'barticle-cache-v2';
 
   this.addEventListener('install', function (event) {
@@ -1186,4 +1186,3 @@ if (!runningTests) {
 }
 
 /* jshint ignore:end */
-//# sourceMappingURL=barticle.map
