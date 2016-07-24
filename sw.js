@@ -1,8 +1,8 @@
 /* global caches */
 
 // urlsToCache will be modified by a post build script
-var urlsToCache = ['/Barticle/assets/barticle-0bc42cf76cc754eb84ad8f7149403272.css', '/Barticle/assets/barticle-0eb36133c5bbccc6b56cff73bf052bad.js', '/Barticle/assets/vendor-469ae94e605e88fc1f8a1ea008cb0c59.js', '/Barticle/assets/vendor-fdf65018cf42c9b78fabee913b19426d.css', '/Barticle/crossdomain.xml', '/Barticle/index.html', '/Barticle'];
-var CACHE_NAME = 'barticle-cache-v1';
+var urlsToCache = ['/Barticle/assets/barticle-0bc42cf76cc754eb84ad8f7149403272.css', '/Barticle/assets/barticle-2ffbd46ed0633de6566d6ab2a4cc3378.js', '/Barticle/assets/vendor-469ae94e605e88fc1f8a1ea008cb0c59.js', '/Barticle/assets/vendor-fdf65018cf42c9b78fabee913b19426d.css', '/Barticle/crossdomain.xml', '/Barticle/index.html', '/Barticle'];
+var CACHE_NAME = 'barticle-cache-v2';
 
 this.addEventListener('install', function (event) {
   event.waitUntil(
@@ -19,7 +19,7 @@ this.addEventListener('activate', function (event) {
     caches.keys().then(function (cacheNames) {
       return Promise.all(
         cacheNames.filter(function (cacheName) {
-          return cacheName.startWith('barticle-') && cacheName !== CACHE_NAME;
+          return cacheName.startsWith('barticle-') && cacheName !== CACHE_NAME;
         })
         .map(function (cacheName) {
           console.log('delete:', cacheName);
