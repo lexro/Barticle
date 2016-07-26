@@ -1,4 +1,5 @@
 /* global caches */
+// some stuff based on http://www.html5rocks.com/en/tutorials/service-worker/introduction/
 
 // urlsToCache will be modified by a post build script
 var urlsToCache = ['/assets/barticle.css', '/assets/barticle.css.map', '/assets/barticle.js', '/assets/barticle.map', '/assets/failed.png', '/assets/passed.png', '/assets/vendor.css', '/assets/vendor.js', '/assets/vendor.map', '/crossdomain.xml', '/index.html', '/'];
@@ -36,20 +37,24 @@ this.addEventListener('activate', function (event) {
 this.addEventListener('fetch', function (event) {
   event.respondWith(
     caches.match(event.request)
-      .then(function(response) {
+      .then(function (response) {
         if (response) {
           return response;
         }
 
-        return fetch(event.request).then(
+        var fetchRequest = event.request.clone();
+
+        return fetch(fetchRequest).then(
           function (response) {
             if (!_shouldCache) {
               return response;
             }
 
+            var responseToCache = response.clone();
+
             caches.open(CACHE_NAME)
               .then(function (cache) {
-                cache.put(event.request, response.clone());
+                cache.put(event.request, responseToCache);
               });
 
             return response;
