@@ -127,27 +127,30 @@ export default Ember.Controller.extend({
       const trains = trainSchedules[routeId];
       for (let i = 0; i < trains.length; i++) {
         const train = trains[i];
-
-        const routes = this.get('model.routes');
-        for (let routeIndex = 0; routeIndex < routes.length; routeIndex++) {
-          if (routes[routeIndex].routeID === routeId) {}
-        }
-
         const endTrainSchedule = endStationSchedule[routeId];
         const endTrainStop = endTrainSchedule[train.trainIdx - 1];
-        // hack because end station times may result in a negative number if ending the next day at 12 am or greater
-        // TODO: fix for trains after 12am
-        let moment1 = endTrainStop.origTime === '12:00 AM' ? moment('11:59 PM', MOMENT_TIME_FORMAT) : moment(endTrainStop.origTime, MOMENT_TIME_FORMAT);
-        let moment2 = moment(train.origTime, MOMENT_TIME_FORMAT);
-        let estimatedTime = moment1.diff(moment2);
 
-        const formattedTrain = {
-          title: routeNames[routeId],
-          departureTime: train.origTime,
-          estimatedTime: moment.duration(estimatedTime).asMinutes() + ' min'
-        };
+        // not all trains can go to the end destination
+        if (endTrainStop) {
+          const routes = this.get('model.routes');
+          for (let routeIndex = 0; routeIndex < routes.length; routeIndex++) {
+            if (routes[routeIndex].routeID === routeId) {}
+          }
 
-        availableTrains.push(formattedTrain);
+          // hack because end station times may result in a negative number if ending the next day at 12 am or greater
+          // TODO: fix for trains after 12am
+          let moment1 = endTrainStop.origTime === '12:00 AM' ? moment('11:59 PM', MOMENT_TIME_FORMAT) : moment(endTrainStop.origTime, MOMENT_TIME_FORMAT);
+          let moment2 = moment(train.origTime, MOMENT_TIME_FORMAT);
+          let estimatedTime = moment1.diff(moment2);
+
+          const formattedTrain = {
+            title: routeNames[routeId],
+            departureTime: train.origTime,
+            estimatedTime: moment.duration(estimatedTime).asMinutes() + ' min'
+          };
+
+          availableTrains.push(formattedTrain);
+        }
       }
     }
 
