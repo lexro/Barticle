@@ -844,11 +844,6 @@ define('barticle/service-worker/register', ['exports'], function (exports) {
     navigator.serviceWorker.register('./sw.js').then(function (registration) {
       // Registration was successful
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
-
-      // navigator.serviceWorker.addEventListener('controllerchange', function() {
-      //   console.log('new service worker reloading');
-      //   window.location.reload();
-      // });
     })['catch'](function (err) {
       // registration failed
       console.log('ServiceWorker registration failed: ', err);
@@ -859,46 +854,50 @@ define('barticle/service-worker/register', ['exports'], function (exports) {
 });
 define('barticle/service-worker/sw', ['exports'], function (exports) {
   /* global caches */
+  // some stuff based on http://www.html5rocks.com/en/tutorials/service-worker/introduction/
 
   // urlsToCache will be modified by a post build script
-  var urlsToCache = ['/assets/barticle-0bc42cf76cc754eb84ad8f7149403272.css', '/assets/barticle-0bc42cf76cc754eb84ad8f7149403272.css.map', '/assets/barticle-5c778084b4f34b4e0e4e01017fa24dc3.js', '/assets/barticle.map', '/assets/failed.png', '/assets/passed.png', '/assets/vendor-fdf65018cf42c9b78fabee913b19426d.css', '/assets/vendor-5a4b16c03779cfeddfe2d998b43682a8.js', '/assets/vendor.map', '/crossdomain.xml', '/index.html', '/', 'https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V', 'https://api.bart.gov/api/route.aspx?cmd=routeinfo&route=all&key=MW9S-E7SL-26DU-VV8V', 'https://fonts.googleapis.com/css?family=Roboto:400'];
-  var CACHE_NAME = 'barticle-cache-v2';
+  var urlsToCache = ['/assets/barticle-0bc42cf76cc754eb84ad8f7149403272.css', '/assets/barticle-0bc42cf76cc754eb84ad8f7149403272.css.map', '/assets/barticle-1ddafbf70d56db667aaae7349699eba9.js', '/assets/barticle.map', '/assets/failed.png', '/assets/passed.png', '/assets/vendor-fdf65018cf42c9b78fabee913b19426d.css', '/assets/vendor-5a4b16c03779cfeddfe2d998b43682a8.js', '/assets/vendor.map', '/crossdomain.xml', '/index.html', '/'];
+  var thirdPartyUrlsToCache = ['https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V', 'https://api.bart.gov/api/route.aspx?cmd=routeinfo&route=all&key=MW9S-E7SL-26DU-VV8V', 'https://fonts.googleapis.com/css?family=Roboto:400'];
+  var CACHE_NAME = 'barticle-cache-v1';
 
+  // precache this stuff
   this.addEventListener('install', function (event) {
     event.waitUntil(caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(urlsToCache);
+      var urls = urlsToCache.concat(thirdPartyUrlsToCache);
+      return cache.addAll(urls);
     }));
   });
 
+  // delete other barticle caches
   this.addEventListener('activate', function (event) {
-    console.log('activate');
     event.waitUntil(caches.keys().then(function (cacheNames) {
       return Promise.all(cacheNames.filter(function (cacheName) {
         return cacheName.startsWith('barticle-') && cacheName !== CACHE_NAME;
       }).map(function (cacheName) {
-        console.log('delete:', cacheName);
         return caches['delete'](cacheName);
       }));
     }));
   });
 
+  // hijack requests and cache them
   this.addEventListener('fetch', function (event) {
-    console.log('fetch:', event.request.url);
     event.respondWith(caches.match(event.request).then(function (response) {
       if (response) {
-        console.log('hit');
         return response;
       }
 
-      return fetch(event.request).then(function (response) {
+      var fetchRequest = event.request.clone();
+
+      return fetch(fetchRequest).then(function (response) {
         if (!_shouldCache) {
-          console.log('should not cache');
           return response;
         }
-        console.log('open cache to cache');
+
+        var responseToCache = response.clone();
+
         caches.open(CACHE_NAME).then(function (cache) {
-          console.log('cache response:', event.request.url);
-          cache.put(event.request, response.clone());
+          cache.put(event.request, responseToCache);
         });
 
         return response;
@@ -906,9 +905,11 @@ define('barticle/service-worker/sw', ['exports'], function (exports) {
     }));
   });
 
+  // cache bart responses
   function _shouldCache(response, url) {
     var isBart = url.indexOf('https://api.bart.gov') !== -1;
     var isLiveReload = url.indexOf('livereload') !== -1;
+
     return !isBart && !isLiveReload && !response || response.status !== 200 || response.type !== 'basic';
   }
 });
@@ -1182,7 +1183,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("barticle/app")["default"].create({"name":"barticle","version":"0.0.0+fe831180"});
+  require("barticle/app")["default"].create({"name":"barticle","version":"0.0.0+0a7cba7e"});
 }
 
 /* jshint ignore:end */
