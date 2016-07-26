@@ -3,12 +3,16 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var MergeTrees = require('broccoli-merge-trees');
 var Funnel = require('broccoli-funnel');
+var argv = require('yargs').argv;
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     inlineContent: {
       'service-worker' : 'app/service-worker/register.js',
-    }
+    },
+    minifyJS: {
+      enabled: !argv.disableMin
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated

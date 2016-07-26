@@ -2,5 +2,8 @@
   "name": "post-build",
   "keywords": [
     "ember-addon"
-  ]
+  ],
+  "devDependencies": {
+    "yargs": "^4.8.1"
+  }
 }
