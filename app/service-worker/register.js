@@ -3,10 +3,6 @@ if ('serviceWorker' in navigator) {
   .then(function(registration) {
     // Registration was successful
     console.log('ServiceWorker registration successful with scope: ', registration.scope);
-
-    navigator.serviceWorker.addEventListener('controllerchange', function() {
-      window.location.reload();
-    });
   })
   .catch(function(err) {
     // registration failed
