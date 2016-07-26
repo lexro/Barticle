@@ -2,7 +2,7 @@
 // some stuff based on http://www.html5rocks.com/en/tutorials/service-worker/introduction/
 
 // urlsToCache will be modified by a post build script
-var urlsToCache = ['/Barticle/assets/barticle-0bc42cf76cc754eb84ad8f7149403272.css', '/Barticle/assets/barticle-1ddafbf70d56db667aaae7349699eba9.js', '/Barticle/assets/vendor-5a4b16c03779cfeddfe2d998b43682a8.js', '/Barticle/assets/vendor-fdf65018cf42c9b78fabee913b19426d.css', '/Barticle/crossdomain.xml', '/Barticle/index.html', '/Barticle'];
+var urlsToCache = ['/Barticle/assets/barticle-0bc42cf76cc754eb84ad8f7149403272.css', '/Barticle/assets/barticle-8eff41ee1966f36cb08749d7c4fec261.js', '/Barticle/assets/vendor-469ae94e605e88fc1f8a1ea008cb0c59.js', '/Barticle/assets/vendor-fdf65018cf42c9b78fabee913b19426d.css', '/Barticle/crossdomain.xml', '/Barticle/index.html', '/Barticle'];
 var thirdPartyUrlsToCache = ['https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V', 'https://api.bart.gov/api/route.aspx?cmd=routeinfo&route=all&key=MW9S-E7SL-26DU-VV8V', 'https://fonts.googleapis.com/css?family=Roboto:400'];
 var CACHE_NAME = 'barticle-cache-v1';
 
