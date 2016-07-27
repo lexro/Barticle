@@ -5,8 +5,11 @@
 
 .train-tile {
   align-items: center;
+  background: $light-color;
   border-bottom: solid 1px $tertiary-color;
+  color: $dark-color;
   display: flex;
+  font-size: 14px;
   height: 55px;
   justify-content: space-between;
   padding: 10px;
