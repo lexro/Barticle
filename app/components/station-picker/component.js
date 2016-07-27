@@ -9,6 +9,12 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * Color embellishment to give the station picker
+   * @type {String}
+   */
+  color: '',
+
+  /**
    * Text for the main input
    * @type {String}
    */

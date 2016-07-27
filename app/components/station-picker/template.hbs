@@ -1,4 +1,7 @@
-<div class="station-picker__input" aria-label={{placeholder}} {{action 'toggleShowStations'}}>{{inputText}}</div>
+<div class="station-picker__input" aria-label={{placeholder}} {{action 'toggleShowStations'}}>
+  <div class="station-picker__dot-{{color}}"></div>
+  {{inputText}}
+</div>
 
 {{#if shouldShowStations}}
   {{#each stations as |station|}}

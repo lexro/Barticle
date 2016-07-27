@@ -27,4 +27,23 @@
       cursor: pointer;
     }
   }
+
+  &__dot-primary,
+  &__dot-secondary {
+    border-radius: 50%;
+    display: inline-block;
+    height: 10px;
+    line-height: 10px;
+    margin-right: 5px;
+    width: 10px;
+  }
+
+  &__dot-primary {
+    background: $primary-color;
+  }
+
+  &__dot-secondary {
+    background: $secondary-color;
+  }
+
 }
