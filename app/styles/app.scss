@@ -7,7 +7,14 @@
 }
 
 body {
-  background: $background;
+  background:
+    linear-gradient(
+      $background-tint,
+      $background-tint
+    ),
+    url('/images/foggy-golden-gate.jpeg') no-repeat no-repeat center center fixed;
+
+  background-size: cover, cover;
 }
 
 .barticle-content {
