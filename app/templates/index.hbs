@@ -1,16 +1,24 @@
-{{station-picker
-  placeholder="Choose starting station"
-  stations=model.stations
-  stationPicked="onStartStationPicked"}}
+<header class="barticle-header">Barticle</header>
 
-{{#if shouldShowEndStations}}
-  {{station-picker
-    placeholder="Choose ending station"
-    stations=endStations
-    stationPicked="onEndStationPicked"}}
-{{/if}}
+<div class='barticle-content'>
+  <div class='barticle-station-form'>
+    {{station-picker
+      placeholder="Choose starting station"
+      stations=model.stations
+      stationPicked="onStartStationPicked"
+      color="primary"}}
 
-{{#if shouldShowTrainList}}
-  {{train-list
-    availableTrains=availableTrains}}
-{{/if}}
+    {{#if shouldShowEndStations}}
+      {{station-picker
+        placeholder="Choose ending station"
+        stations=endStations
+        stationPicked="onEndStationPicked"
+        color="secondary"}}
+    {{/if}}
+  </div>
+
+  {{#if shouldShowTrainList}}
+    {{train-list
+      availableTrains=availableTrains}}
+  {{/if}}
+</div>

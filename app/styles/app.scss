@@ -1,7 +1,38 @@
 @import 'variables';
-@import 'components/station-picker/_style';
-@import 'components/train-list/_style';
+@import 'components/station-picker/style';
+@import 'components/train-list/style';
 
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+body {
+  background: $background;
+}
+
+.barticle-content {
+  margin: 0 auto;
+  max-width: 90%;
+}
+
+.barticle-header {
+  background: $primary-color;
+  color: $light-color;
+  font-size: 16px;
+  height: 32px;
+  line-height: 32px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.barticle-station-form {
+  box-shadow: $box-shadow;
+}
+
+.station-picker__input {
+  border-bottom: 1px solid $tertiary-color;
+}
+
+.train-list {
+  margin-top: 12px;
 }
