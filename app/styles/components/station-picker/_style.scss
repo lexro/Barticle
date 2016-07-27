@@ -1,12 +1,10 @@
 .station-picker {
-
   &__input {
-    background: $primary-color;
+    background: $light-color;
     border: 0;
-    color: $light-color;
+    color: $dark-color;
     font-size: 16px;
     padding: 12px;
-    width: 100%;
 
     &:focus {
       outline: none;
@@ -18,6 +16,7 @@
   }
 
   &__tile {
+    background: $light-color;
     border-bottom: solid 1px $tertiary-color;
     color: $dark-color;
     font-size: 16px;
