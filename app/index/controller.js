@@ -207,6 +207,10 @@ export default Ember.Controller.extend({
         this.set('availableTrains', availableTrains);
         this.set('shouldShowTrainList', true);
       }.bind(this));
+    },
+
+    onStartStationSelect: function () {
+      this.set('shouldShowEndStations', false);
     }
   }
 });

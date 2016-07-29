@@ -4,8 +4,14 @@ export default Ember.Component.extend({
   classNames: ['station-picker'],
 
   initFunc: Ember.on('init', function () {
-    var placeholder = this.get('placeholder');
-    this.set('inputText', placeholder);
+    const placeholder = this.get('placeholder');
+    const currentStation = this.get('currentStation');
+
+    if (currentStation && currentStation.name) {
+      this.set('inputText', currentStation.name);
+    } else {
+      this.set('inputText', placeholder);
+    }
   }),
 
   /**
@@ -52,6 +58,12 @@ export default Ember.Component.extend({
 
     toggleShowStations: function () {
       this.toggleProperty('shouldShowStations');
+
+      if (this.get('shouldShowStations')) {
+        this.sendAction('selecting');
+      } else if (this.get('inputText') !== this.get('placeholder')) {
+        this.sendAction('stationPicked', this.get('currentPickedStation'));
+      }
     }
   }
 });
