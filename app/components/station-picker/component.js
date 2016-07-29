@@ -38,17 +38,15 @@ export default Ember.Component.extend({
    */
   stations: [],
 
+  currentPickedStation: {},
+
   actions: {
     pickStation: function (station) {
       var stationName = station.name;
-      var currentStation = this.get('inputText');
 
-      // should not cause an update if we picked the same station
-      if (stationName !== currentStation) {
-        this.set('inputText', stationName);
-        this.sendAction('stationPicked', station);
-      }
-
+      this.set('currentPickedStation', station);
+      this.set('inputText', stationName);
+      this.sendAction('stationPicked', station);
       this.set('shouldShowStations', false);
     },
 

@@ -167,18 +167,26 @@ export default Ember.Controller.extend({
   actions: {
     onStartStationPicked: function (startStation) {
       const startStationAbbr = startStation.abbr;
+      const startStationPicked = this.get('startStationPicked');
+      const isSameStation = startStationPicked === startStation;
+      console.log('startStationPicked:', startStationPicked);
+      console.log('startStation:', startStation);
+      console.log('isSameStation:', isSameStation);
+      // we don't need to change the model if the user picked the same start stations
+      if (!isSameStation) {
+        // Get the start station schedule in parallel
+        const stationSchedulesService = this.get('stationSchedulesService');
+        stationSchedulesService.fetchSchedule(startStationAbbr);
 
-      // Get the start station schedule in parallel
-      const stationSchedulesService = this.get('stationSchedulesService');
-      stationSchedulesService.fetchSchedule(startStationAbbr);
+        // figure out what end stations to show
+        let startStationRoutes = this._getAllRoutes(startStationAbbr);
+        let endStationData = this._getAllStops(startStationRoutes, startStationAbbr);
+        let endStations = this._getStations(endStationData);
 
-      // figure out what end stations to show
-      let startStationRoutes = this._getAllRoutes(startStationAbbr);
-      let endStationData = this._getAllStops(startStationRoutes, startStationAbbr);
-      let endStations = this._getStations(endStationData);
+        this.set('startStationPicked', startStation);
+        this.set('endStations', endStations);
+      }
 
-      this.set('startStationPicked', startStation);
-      this.set('endStations', endStations);
       this.set('shouldShowEndStations', true);
     },
 
