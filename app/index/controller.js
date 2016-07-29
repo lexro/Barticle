@@ -169,9 +169,7 @@ export default Ember.Controller.extend({
       const startStationAbbr = startStation.abbr;
       const startStationPicked = this.get('startStationPicked');
       const isSameStation = startStationPicked === startStation;
-      console.log('startStationPicked:', startStationPicked);
-      console.log('startStation:', startStation);
-      console.log('isSameStation:', isSameStation);
+
       // we don't need to change the model if the user picked the same start stations
       if (!isSameStation) {
         // Get the start station schedule in parallel
