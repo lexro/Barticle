@@ -5,13 +5,8 @@ export default Ember.Component.extend({
 
   initFunc: Ember.on('init', function () {
     const placeholder = this.get('placeholder');
-    const currentStation = this.get('currentStation');
 
-    if (currentStation && currentStation.name) {
-      this.set('inputText', currentStation.name);
-    } else {
-      this.set('inputText', placeholder);
-    }
+    this.set('inputText', placeholder);
   }),
 
   /**
