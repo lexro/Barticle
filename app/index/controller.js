@@ -21,7 +21,9 @@ export default Ember.Controller.extend({
 
   stationSchedulesService: Ember.inject.service('station-schedules'),
 
-  startStationPicked: '',
+  startStationPicked: {},
+
+  endStationPicked: {},
 
   availableTrains: [],
 
@@ -192,19 +194,26 @@ export default Ember.Controller.extend({
       Ember.Logger.log('endStationPicked');
       const stationSchedulesService = this.get('stationSchedulesService');
       const startStationAbbr = this.get('startStationPicked.abbr');
+      const isSameStation = this.get('endStationPicked') === endStation;
 
-      Ember.RSVP.all([
-        stationSchedulesService.fetchSchedule(startStationAbbr),
-        stationSchedulesService.fetchSchedule(endStation.abbr)
-      ])
-      .then(function (results) {
-        const startStationSchedule = results[0];
-        const endStationSchedule = results[1];
-        const availableTrains = this._getAvailableTrains(startStationSchedule, endStationSchedule, endStation);
+      // we don't need to change the model if the user picked the same end stations
+      if (!isSameStation) {
+        Ember.RSVP.all([
+          stationSchedulesService.fetchSchedule(startStationAbbr),
+          stationSchedulesService.fetchSchedule(endStation.abbr)
+        ])
+        .then(function (results) {
+          const startStationSchedule = results[0];
+          const endStationSchedule = results[1];
+          const availableTrains = this._getAvailableTrains(startStationSchedule, endStationSchedule, endStation);
 
-        this.set('availableTrains', availableTrains);
+          this.set('endStationPicked', endStation);
+          this.set('availableTrains', availableTrains);
+          this.set('shouldShowTrainList', true);
+        }.bind(this));
+      } else {
         this.set('shouldShowTrainList', true);
-      }.bind(this));
+      }
     },
 
     onStartStationSelect: function () {
