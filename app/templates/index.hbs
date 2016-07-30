@@ -9,13 +9,12 @@
       color="primary"
       selecting="onStartStationSelect"}}
 
-    {{#if shouldShowEndStations}}
-      {{station-picker
-        placeholder="Choose ending station"
-        stations=endStations
-        stationPicked="onEndStationPicked"
-        color="secondary"}}
-    {{/if}}
+    {{station-picker
+      placeholder="Choose ending station"
+      stations=endStations
+      stationPicked="onEndStationPicked"
+      color="secondary"
+      shouldShow=shouldShowEndStations}}
   </div>
 
   {{#if shouldShowTrainList}}

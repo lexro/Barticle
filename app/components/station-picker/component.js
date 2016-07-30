@@ -10,6 +10,32 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * Flag to tell us whether we should hide or show the contents of this component
+   * @type {Boolean}
+   */
+  shouldShow: true,
+
+  /**
+   * Hide list of trains stops if we are not showing this component
+   */
+  hideList: Ember.observer('shouldShow', function () {
+    if (!this.get('shouldShow')) {
+      this.set('shouldShowStations', false);
+    }
+  }),
+
+  /**
+   * Reset component when stations change
+   */
+  doReset: Ember.observer('stations', function () {
+    const placeholder = this.get('placeholder');
+
+    this.set('inputText', placeholder);
+    this.set('currentPickedStation', {});
+    this.set('shouldShowStations', false);
+  }),
+
+  /**
    * Color embellishment to give the station picker
    * @type {String}
    */

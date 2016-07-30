@@ -1,10 +1,12 @@
-<div class="station-picker__input" aria-label={{placeholder}} {{action 'toggleShowStations'}}>
-  <div class="station-picker__dot-{{color}}"></div>
-  {{inputText}}
-</div>
+{{#if shouldShow}}
+  <div class="station-picker__input" aria-label={{placeholder}} {{action 'toggleShowStations'}}>
+    <div class="station-picker__dot-{{color}}"></div>
+    {{inputText}}
+  </div>
 
-{{#if shouldShowStations}}
-  {{#each stations as |station|}}
-    <div class="station-picker__tile" {{action 'pickStation' station}}>{{station.name}}</div>
-  {{/each}}
+  {{#if shouldShowStations}}
+    {{#each stations as |station|}}
+      <div class="station-picker__tile" {{action 'pickStation' station}}>{{station.name}}</div>
+    {{/each}}
+  {{/if}}
 {{/if}}
