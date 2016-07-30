@@ -12,9 +12,20 @@
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/barticle.css">
 
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-69006536-2', 'auto', {
+        cookiePath: '/Barticle/'
+      });
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+
     {{content-for "head-footer"}}
   </head>
   <body>
+
+
     {{content-for "body"}}
     {{content-for "service-worker"}}
 
