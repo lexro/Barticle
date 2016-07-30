@@ -45,3 +45,18 @@ body {
 .train-list {
   margin-top: 12px;
 }
+
+@media screen and (min-width: 768px) {
+  body {
+    .barticle-header {
+      font-size: 24px;
+      height: 48px;
+      line-height: 48px;
+      margin-bottom: 16px;
+    }
+
+    .barticle-content {
+      max-width: 600px;
+    }
+  }
+}
