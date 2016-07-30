@@ -174,6 +174,8 @@ export default Ember.Controller.extend({
 
       // we don't need to change the model if the user picked the same start stations
       if (!isSameStation) {
+        Ember.Logger.log('fetching data to calculate end stations');
+
         // Get the start station schedule in parallel
         const stationSchedulesService = this.get('stationSchedulesService');
         stationSchedulesService.fetchSchedule(startStationAbbr);
@@ -198,6 +200,8 @@ export default Ember.Controller.extend({
 
       // we don't need to change the model if the user picked the same end stations
       if (!isSameStation) {
+        Ember.Logger.log('fetching data to calculate trains');
+
         Ember.RSVP.all([
           stationSchedulesService.fetchSchedule(startStationAbbr),
           stationSchedulesService.fetchSchedule(endStation.abbr)
