@@ -174,6 +174,8 @@ export default Ember.Controller.extend({
 
       // we don't need to change the model if the user picked the same start stations
       if (!isSameStation) {
+        this.set('shouldShowTrainList', false);
+
         Ember.Logger.log('fetching data to calculate end stations');
 
         // Get the start station schedule in parallel
