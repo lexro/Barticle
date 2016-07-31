@@ -1,7 +1,7 @@
 # Barticle
 An offline first bart web app that displays train schedules. [Try it out!](https://lexro.github.io/Barticle/)
 
-The point of this is to experiement with service workers. That being said, it's best Barticle is used in [service worker supported browsers](http://caniuse.com/#search=service%20workers).
+The point of this is to experiment with service workers. That being said, it's best Barticle is used in [service worker supported browsers](http://caniuse.com/#search=service%20workers).
 
 ## Prerequisites
 
@@ -47,4 +47,5 @@ You will need the following things properly installed on your computer.
 * [Udacity course on service workers](https://www.udacity.com/course/offline-web-applications--ud899)
 * [Animations in Ember](https://github.com/ember-animation/liquid-fire)
 * [Unsplash for free high-res images](https://unsplash.com/)
+* [BART API Documentation[(http://api.bart.gov/docs/overview/index.aspx)
 
