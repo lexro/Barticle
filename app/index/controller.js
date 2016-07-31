@@ -2,8 +2,8 @@ import Ember from 'ember';
 import moment from 'moment';
 
 const MOMENT_TIME_FORMAT = 'HH:mm a';
-
 const MAX_TRAINS = 5;
+const MINUTES_IN_A_DAY = 1440;
 
 export default Ember.Controller.extend({
 
@@ -155,15 +155,18 @@ export default Ember.Controller.extend({
           }
 
           // hack because end station times may result in a negative number if ending the next day at 12 am or greater
-          // TODO: fix for trains after 12am
-          let moment1 = endTrainStop.origTime === '12:00 AM' ? moment('11:59 PM', MOMENT_TIME_FORMAT) : moment(endTrainStop.origTime, MOMENT_TIME_FORMAT);
+          let moment1 = moment(endTrainStop.origTime, MOMENT_TIME_FORMAT);
           let moment2 = moment(train.origTime, MOMENT_TIME_FORMAT);
           let estimatedTime = moment1.diff(moment2);
+          estimatedTime = moment.duration(estimatedTime).asMinutes();
+          if (estimatedTime < 0) {
+            estimatedTime += MINUTES_IN_A_DAY;
+          }
 
           const formattedTrain = {
             title: routeNames[routeId],
             departureTime: train.origTime,
-            estimatedTime: moment.duration(estimatedTime).asMinutes() + ' min'
+            estimatedTime: estimatedTime + ' min'
           };
 
           availableTrains.push(formattedTrain);
