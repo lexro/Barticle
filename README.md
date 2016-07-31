@@ -3,6 +3,18 @@ An offline first bart web app that displays train schedules. [Try it out!](https
 
 The point of this is to experiment with service workers. That being said, it's best to use Barticle in [service worker supported browsers](http://caniuse.com/#search=service%20workers).
 
+## What gets cached by Service Workers?
+* pre-cached
+  * All app assets (i.e. js, css, images, fonts)
+  * The data to calculate stations and their end points
+* cached by using the app
+  * train results as they are requested (because it's >200MB to pre-cache)
+
+## Limitations
+* Only gives train stops where a direct route exists (no transfers).
+* Using the app in offline mode will only give train results if you already searched for those trains in online mode
+* Useable in modern browsers only
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
