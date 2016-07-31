@@ -31,15 +31,15 @@
     
     <script>
 if ('serviceWorker' in navigator) {
-  // navigator.serviceWorker.register('./sw.js')
-  // .then(function(registration) {
-  //   // Registration was successful
-  //   console.log('ServiceWorker registration successful with scope: ', registration.scope);
-  // })
-  // .catch(function(err) {
-  //   // registration failed
-  //   console.log('ServiceWorker registration failed: ', err);
-  // });
+  navigator.serviceWorker.register('./sw.js')
+  .then(function(registration) {
+    // Registration was successful
+    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+  })
+  .catch(function(err) {
+    // registration failed
+    console.log('ServiceWorker registration failed: ', err);
+  });
 } else {
   console.log('ServiceWorker not supported');
 }
@@ -47,7 +47,7 @@ if ('serviceWorker' in navigator) {
 </script>
 
     <script src="assets/vendor-e8ea13569088fcaca55f275dd9ca3220.js"></script>
-    <script src="assets/barticle-4561f267904e8a1798588863fc571490.js"></script>
+    <script src="assets/barticle-b7386813587bedc075bbb1be8ccf971a.js"></script>
 
     
   </body>
