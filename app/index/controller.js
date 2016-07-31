@@ -229,6 +229,10 @@ export default Ember.Controller.extend({
     onStartStationSelect: function () {
       this.set('shouldShowEndStations', false);
       this.set('shouldShowTrainList', false);
+    },
+
+    onEndStationSelect: function () {
+      this.set('shouldShowTrainList', false);
     }
   }
 });
