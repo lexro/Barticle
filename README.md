@@ -47,5 +47,5 @@ You will need the following things properly installed on your computer.
 * [Udacity course on service workers](https://www.udacity.com/course/offline-web-applications--ud899)
 * [Animations in Ember](https://github.com/ember-animation/liquid-fire)
 * [Unsplash for free high-res images](https://unsplash.com/)
-* [BART API Documentation[(http://api.bart.gov/docs/overview/index.aspx)
+* [BART API Documentation](http://api.bart.gov/docs/overview/index.aspx)
 
