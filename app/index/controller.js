@@ -3,6 +3,8 @@ import moment from 'moment';
 
 const MOMENT_TIME_FORMAT = 'HH:mm a';
 
+const MAX_TRAINS = 5;
+
 export default Ember.Controller.extend({
 
   /**
@@ -26,6 +28,8 @@ export default Ember.Controller.extend({
   endStationPicked: {},
 
   availableTrains: [],
+
+  time: Date.now(),
 
   /**
    * Helper to get all routes that a station is a part of
@@ -125,10 +129,21 @@ export default Ember.Controller.extend({
 
     // format the train data
     let availableTrains = [];
+    const time = this.get('time');
     for (let routeId in trainSchedules) {
       const trains = trainSchedules[routeId];
       for (let i = 0; i < trains.length; i++) {
         const train = trains[i];
+        let startTrainMoment = moment(train.origTime, MOMENT_TIME_FORMAT);
+
+        // if user selected a time, exit after we get enough trains
+        if (time && availableTrains.length > MAX_TRAINS) {
+          break;
+        } else if (time && moment(time).isAfter(startTrainMoment)) {
+          // if user selected a time, only show trains after that time
+          continue;
+        }
+
         const endTrainSchedule = endStationSchedule[routeId];
         const endTrainStop = endTrainSchedule[train.trainIdx - 1];
 
@@ -233,6 +248,10 @@ export default Ember.Controller.extend({
 
     onEndStationSelect: function () {
       this.set('shouldShowTrainList', false);
+    },
+
+    onTimeSelected: function (time) {
+      this.set('time', time);
     }
   }
 });

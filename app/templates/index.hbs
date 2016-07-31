@@ -1,6 +1,11 @@
 <header class="barticle-header">Barticle</header>
 
 <div class='barticle-content'>
+  {{time-selector
+    class="barticle-time-selector"
+    timeSelected="onTimeSelected"
+    isNow="true"}}
+
   <div class='barticle-station-form'>
     {{station-picker
       placeholder="Choose starting station"

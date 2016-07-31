@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'components/station-picker/style';
 @import 'components/train-list/style';
+@import 'components/time-selector/style';
 
 * {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -44,6 +45,10 @@ body {
 
 .train-list {
   margin-top: 12px;
+}
+
+.barticle-time-selector {
+  margin-bottom: 12px;
 }
 
 @media screen and (min-width: 768px) {
