@@ -250,8 +250,29 @@ export default Ember.Controller.extend({
       this.set('shouldShowTrainList', false);
     },
 
+    // TODO: refactor this stuff - there is no need to go through the service again
+    // but it should be ok because the service caches
     onTimeSelected: function (time) {
       this.set('time', time);
+
+      const startStation = this.get('startStationPicked');
+      const endStation = this.get('endStationPicked');
+
+      if (startStation && endStation) {
+        const stationSchedulesService = this.get('stationSchedulesService');
+
+        Ember.RSVP.all([
+          stationSchedulesService.fetchSchedule(startStation.abbr),
+          stationSchedulesService.fetchSchedule(endStation.abbr)
+        ])
+        .then(function (results) {
+          const startStationSchedule = results[0];
+          const endStationSchedule = results[1];
+          const availableTrains = this._getAvailableTrains(startStationSchedule, endStationSchedule, endStation);
+
+          this.set('availableTrains', availableTrains);
+        }.bind(this));
+      }
     }
   }
 });
