@@ -45,9 +45,9 @@ export default Ember.Controller.extend({
       for(let i = 0; i < routes.length; i++) {
         const route = routes[i];
         const stationAbbrs = route.config.station;
-        const doesStationHaveRoute = stationAbbrs.indexOf(stationAbbr) !== -1;
+        const doesRouteHaveStation = stationAbbrs.indexOf(stationAbbr) !== -1;
 
-        if (doesStationHaveRoute) {
+        if (doesRouteHaveStation) {
           startStationRoutes.push(route);
         }
       }
@@ -59,7 +59,7 @@ export default Ember.Controller.extend({
    * Helper to get all unique stops that a start station can travel
    *
    * @private
-   * @param  {Array} routes           Array of bart API routes
+   * @param  {Array} routes            Array of bart API routes that the start station is in
    * @param  {String} startStationAbbr Abbreviation of the start station
    * @return {Object}                  Mapping from station abbr to routes they exist in
    */
@@ -95,8 +95,8 @@ export default Ember.Controller.extend({
    * Helper to get bart API station data from a list of station abbr
    *
    * @private
-   * @param  {Object} stationData
-   * @return {Array<Object>}
+   * @param  {Object} stationData - data of end stations that the start station may travel to
+   * @return {Array<Object>} - detailed data of end stations
    */
   _getStations: function (stationData) {
       const endStationsAbbr = Object.keys(stationData);
