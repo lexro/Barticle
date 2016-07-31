@@ -124,7 +124,12 @@ export default Ember.Controller.extend({
     for (let i = 0; i < routes.length; i++) {
       const routeId = routes[i].routeID;
       routeNames[routeId] = routes[i].name;
-      trainSchedules[routeId] = startStationSchedule[routeId];
+
+      // Bart API /routeinfo and /stnschd are inconsistent with what routes are available
+      // for the start station
+      if (startStationSchedule[routeId]) {
+        trainSchedules[routeId] = startStationSchedule[routeId];
+      }
     }
 
     // format the train data
