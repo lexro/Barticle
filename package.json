@@ -48,6 +48,7 @@
     "gulp": "^3.9.1",
     "gulp-gh-pages": "^0.5.4",
     "gulp-shell": "^0.5.2",
+    "liquid-fire": "0.24.1",
     "loader.js": "^4.0.1"
   },
   "ember-addon": {

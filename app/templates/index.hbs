@@ -18,8 +18,8 @@
       shouldShow=shouldShowEndStations}}
   </div>
 
-  {{#if shouldShowTrainList}}
+  {{#liquid-if shouldShowTrainList class="result-list"}}
     {{train-list
       availableTrains=availableTrains}}
-  {{/if}}
+  {{/liquid-if}}
 </div>

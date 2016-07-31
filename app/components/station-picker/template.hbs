@@ -4,9 +4,9 @@
     {{inputText}}
   </div>
 
-  {{#if shouldShowStations}}
+  {{#liquid-if shouldShowStations class='station-list'}}
     {{#each stations as |station|}}
       <div class="station-picker__tile" {{action 'pickStation' station}}>{{station.name}}</div>
     {{/each}}
-  {{/if}}
+  {{/liquid-if}}
 {{/if}}
