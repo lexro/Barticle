@@ -194,7 +194,7 @@ export default Ember.Controller.extend({
       if (!isSameStation) {
         this.set('shouldShowTrainList', false);
 
-        Ember.Logger.log('fetching data to calculate end stations');
+        Ember.Logger.debug('fetching data to calculate end stations');
 
         // Get the start station schedule in parallel
         const stationSchedulesService = this.get('stationSchedulesService');
@@ -215,7 +215,7 @@ export default Ember.Controller.extend({
     },
 
     onEndStationPicked: function (endStation) {
-      Ember.Logger.log('endStationPicked');
+      Ember.Logger.debug('endStationPicked');
       const stationSchedulesService = this.get('stationSchedulesService');
       const startStationAbbr = this.get('startStationPicked.abbr');
       const isSameStation = this.get('endStationPicked') === endStation;
@@ -224,7 +224,7 @@ export default Ember.Controller.extend({
       if (!isSameStation) {
         this.set('shouldShowTrainList', false);
 
-        Ember.Logger.log('fetching data to calculate trains');
+        Ember.Logger.debug('fetching data to calculate trains');
 
         Ember.RSVP.all([
           stationSchedulesService.fetchSchedule(startStationAbbr),
