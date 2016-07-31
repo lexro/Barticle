@@ -12,6 +12,7 @@ The point of this is to experiment with service workers. That being said, it's b
 
 ## Limitations
 * Only gives train stops where a direct route exists (no transfers).
+* Only shows the weekday schedule
 * Using the app in offline mode will only give train results if you already searched for those trains in online mode
 * Useable in modern browsers only
 
