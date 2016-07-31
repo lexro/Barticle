@@ -144,7 +144,7 @@ export default Ember.Controller.extend({
           continue;
         }
 
-        const endTrainSchedule = endStationSchedule[routeId];
+        const endTrainSchedule = endStationSchedule[routeId] || [];
         const endTrainStop = endTrainSchedule[train.trainIdx - 1];
 
         // not all trains can go to the end destination
