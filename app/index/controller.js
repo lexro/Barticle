@@ -266,7 +266,7 @@ export default Ember.Controller.extend({
       const startStation = this.get('startStationPicked');
       const endStation = this.get('endStationPicked');
 
-      if (startStation && endStation) {
+      if (startStation.length && endStation.length) {
         const stationSchedulesService = this.get('stationSchedulesService');
 
         Ember.RSVP.all([
