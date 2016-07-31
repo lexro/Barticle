@@ -1,4 +1,4 @@
-{{#if shouldShow}}
+{{#liquid-if shouldShow class="picker"}}
   <div class="station-picker__input" aria-label={{placeholder}} {{action 'toggleShowStations'}}>
     <div class="station-picker__dot-{{color}}"></div>
     {{inputText}}
@@ -9,4 +9,4 @@
       <div class="station-picker__tile" {{action 'pickStation' station}}>{{station.name}}</div>
     {{/each}}
   {{/liquid-if}}
-{{/if}}
+{{/liquid-if}}
