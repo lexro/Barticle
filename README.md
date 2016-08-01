@@ -3,8 +3,7 @@ An offline first bart web app that displays train schedules. [Try it out!](https
 
 The point of this is to experiment with service workers. That being said, it's best to use Barticle in [service worker supported browsers](http://caniuse.com/#search=service%20workers).
 
-![screen shot 2016-07-31 at 10 39 48 pm](https://cloud.githubusercontent.com/assets/6924595/17284567/b803a026-5770-11e6-82ed-2ae3abd653d9.png)
-
+![Video Walkthrough](barticle-walkthrough.gif)
 
 ## What gets cached by Service Workers?
 * pre-cached
