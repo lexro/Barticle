@@ -2,7 +2,7 @@
 // some stuff based on http://www.html5rocks.com/en/tutorials/service-worker/introduction/
 
 // urlsToCache will be modified by a post build script
-var urlsToCache = ['/assets/barticle.css', '/assets/barticle.css.map', '/assets/barticle.js', '/assets/barticle.map', '/assets/failed.png', '/assets/passed.png', '/assets/vendor.css', '/assets/vendor.js', '/assets/vendor.map', '/crossdomain.xml', '/index.html', '/'];
+var urlsToCache = ['/assets/barticle.css', '/assets/barticle.js', '/assets/barticle.map', '/assets/failed.png', '/assets/passed.png', '/assets/vendor.css', '/assets/vendor.js', '/assets/vendor.map', '/crossdomain.xml', '/images/foggy-golden-gate.jpeg', '/index.html', '/'];
 var thirdPartyUrlsToCache = ['https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V', 'https://api.bart.gov/api/route.aspx?cmd=routeinfo&route=all&key=MW9S-E7SL-26DU-VV8V', 'https://fonts.googleapis.com/css?family=Roboto:400'];
 var CACHE_NAME = 'barticle-cache-v5';
 
@@ -35,6 +35,7 @@ this.addEventListener('activate', function (event) {
 
 // hijack requests and cache them
 this.addEventListener('fetch', function (event) {
+  var url = event.request.url;
   event.respondWith(
     caches.match(event.request)
       .then(function (response) {
@@ -46,7 +47,7 @@ this.addEventListener('fetch', function (event) {
 
         return fetch(fetchRequest).then(
           function (response) {
-            if (!_shouldCache) {
+            if (!_shouldCache(response, url)) {
               return response;
             }
 
