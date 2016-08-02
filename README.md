@@ -35,10 +35,17 @@ You will need the following things properly installed on your computer.
 * `npm install`
 * `bower install`
 
-## Running / Development
+## Running
 
-* `ember server`
+#### Development
+
+* `ember server` (Development mode)
 * Visit your app at [http://localhost:4200](http://localhost:4200).
+
+#### Production
+* `ember server -prod` (Production mode)
+*  [http://localhost:4200/Barticle/](http://localhost:4200/Barticle/)
+*  You can also just visit [https://lexro.github.io/Barticle/](https://lexro.github.io/Barticle/)
 
 ### Running Tests
 
