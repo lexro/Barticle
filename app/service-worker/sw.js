@@ -36,34 +36,47 @@ this.addEventListener('activate', function (event) {
 // hijack requests and cache them
 this.addEventListener('fetch', function (event) {
   var url = event.request.url;
-  event.respondWith(
-    caches.match(event.request)
-      .then(function (response) {
-        if (response) {
-          return response;
-        }
 
-        var fetchRequest = event.request.clone();
-
-        return fetch(fetchRequest).then(
-          function (response) {
-            if (!_shouldCache(response, url)) {
-              return response;
-            }
-
-            var responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(function (cache) {
-                cache.put(event.request, responseToCache);
-              });
-
+  if (_shouldHijack(url)) {
+    event.respondWith(
+      caches.match(event.request)
+        .then(function (response) {
+          if (response) {
             return response;
           }
-        );
-      })
-    );
+
+          var fetchRequest = event.request.clone();
+
+          return fetch(fetchRequest).then(
+            function (response) {
+              if (!_shouldCache(response, url)) {
+                return response;
+              }
+
+              var responseToCache = response.clone();
+
+              caches.open(CACHE_NAME)
+                .then(function (cache) {
+                  cache.put(event.request, responseToCache);
+                });
+
+              return response;
+            }
+          );
+        })
+      );
+    }
 });
+
+function _shouldHijack (url) {
+  var isBlank = url === 'about:blank';
+
+  if (isBlank) {
+    return false;
+  }
+
+  return true;
+}
 
 // cache bart responses
 function _shouldCache (response, url) {
