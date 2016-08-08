@@ -4,7 +4,7 @@
 // urlsToCache will be modified by a post build script
 var urlsToCache = ['/Barticle/assets/barticle.css', '/Barticle/assets/barticle.js', '/Barticle/assets/vendor.css', '/Barticle/assets/vendor.js', '/Barticle/crossdomain.xml', '/Barticle/images/foggy-golden-gate.jpeg', '/Barticle/index.html', '/Barticle'];
 var thirdPartyUrlsToCache = ['https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V', 'https://api.bart.gov/api/route.aspx?cmd=routeinfo&route=all&key=MW9S-E7SL-26DU-VV8V', 'https://fonts.googleapis.com/css?family=Roboto:400'];
-var CACHE_NAME = 'barticle-cache-v5';
+var CACHE_NAME = 'barticle-cache-v6';
 
 // precache this stuff
 this.addEventListener('install', function (event) {
