@@ -2,7 +2,7 @@
 // some stuff based on http://www.html5rocks.com/en/tutorials/service-worker/introduction/
 
 // urlsToCache will be modified by a post build script
-var urlsToCache = ['/assets/barticle.css', '/assets/barticle.js', '/assets/barticle.map', '/assets/failed.png', '/assets/passed.png', '/assets/vendor.css', '/assets/vendor.js', '/assets/vendor.map', '/crossdomain.xml', '/images/foggy-golden-gate.jpeg', '/index.html', '/'];
+var urlsToCache = ['/Barticle/assets/barticle.css', '/Barticle/assets/barticle.js', '/Barticle/assets/vendor.css', '/Barticle/assets/vendor.js', '/Barticle/crossdomain.xml', '/Barticle/images/foggy-golden-gate.jpeg', '/Barticle/index.html'];
 var thirdPartyUrlsToCache = ['https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V', 'https://api.bart.gov/api/route.aspx?cmd=routeinfo&route=all&key=MW9S-E7SL-26DU-VV8V', 'https://fonts.googleapis.com/css?family=Roboto:400'];
 var CACHE_NAME = 'barticle-cache-v5';
 

@@ -13,6 +13,11 @@ module.exports = function(defaults) {
     minifyJS: {
       enabled: !argv.disableMin
     },
+    fingerprint: {
+      enabled: false
+      //TODO: figure out why develeopment sw.js is being served
+      // instead of dist/sw.js
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated

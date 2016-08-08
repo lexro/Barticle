@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'barticle',
     environment: environment,
-    baseURL: '/',
+    baseURL: '/Barticle',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
@@ -50,7 +50,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.baseURL = '/Barticle';
   }
 
   return ENV;
