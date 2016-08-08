@@ -40,7 +40,7 @@ You will need the following things properly installed on your computer.
 #### Development
 
 * `ember server` (Development mode)
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+* Visit your app at [http://localhost:4200/Barticle/](http://localhost:4200/Barticle/).
 
 #### Production
 * `ember server -prod` (Production mode)
