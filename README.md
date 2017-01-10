@@ -1,5 +1,5 @@
 # Barticle
-An offline first bart web app that displays train schedules. [Try it out!](https://lexro.github.io/Barticle/)
+An offline first bart web app that displays train schedules.
 
 The point of this is to experiment with service workers. That being said, it's best to use Barticle in [service worker supported browsers](http://caniuse.com/#search=service%20workers).
 
